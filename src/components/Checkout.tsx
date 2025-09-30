@@ -170,7 +170,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                     </div>
                     <div className="text-center">
                       <img
-                        src="/public/WhatsApp Image 2025-09-23 at 19.50.39.jpeg"
+                        src="https://images.pexels.com/photos/6963944/pexels-photo-6963944.jpeg?auto=compress&cs=tinysrgb&w=300&h=300"
                         alt="QR Code PIX"
                         className="w-48 h-48 mx-auto mb-2"
                       />

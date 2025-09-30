@@ -33,4 +33,6 @@ export interface Category {
 export interface ShopSettings {
   phone: string;
   instagram: string;
+  logoUrl: string;
+  shopName: string;
 }

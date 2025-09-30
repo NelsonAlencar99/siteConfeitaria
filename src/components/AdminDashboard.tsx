@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Plus, Edit2, Trash2, Package, Users, Settings, LogOut } from 'lucide-react';
+import { X, Plus, Edit2, Trash2, Package, Users, Settings, LogOut, FolderOpen } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Order, Product, Category, ShopSettings } from '../types';
 import { products as initialProducts, categories as initialCategories } from '../data/products';
@@ -11,16 +11,21 @@ interface AdminDashboardProps {
 
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
   const [orders, setOrders] = useLocalStorage<Order[]>('ge-bolos-orders', []);
+  const [deletedOrders, setDeletedOrders] = useLocalStorage<Order[]>('ge-bolos-deleted-orders', []);
   const [products, setProducts] = useLocalStorage<Product[]>('ge-bolos-products', initialProducts);
   const [categories, setCategories] = useLocalStorage<Category[]>('ge-bolos-categories', initialCategories);
   const [settings, setSettings] = useLocalStorage<ShopSettings>('ge-bolos-settings', {
     phone: '+55 85 8412-8195',
-    instagram: 'https://www.instagram.com/gebolosgoumet?igsh=ejBwNnp4ejhpMnd5'
+    instagram: 'https://www.instagram.com/gebolosgoumet?igsh=ejBwNnp4ejhpMnd5',
+    logoUrl: '',
+    shopName: 'Ge Bolos Gourmet'
   });
   
-  const [activeTab, setActiveTab] = useState<'orders' | 'products' | 'categories' | 'settings'>('orders');
+  const [activeTab, setActiveTab] = useState<'orders' | 'products' | 'categories' | 'settings' | 'deleted'>('orders');
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [showAddCategory, setShowAddCategory] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
 
   if (!isOpen) return null;
 
@@ -28,6 +33,26 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
     setOrders(prev => prev.map(order => 
       order.id === orderId ? { ...order, status } : order
     ));
+  };
+
+  const deleteOrder = (orderId: string) => {
+    const orderToDelete = orders.find(order => order.id === orderId);
+    if (orderToDelete) {
+      setDeletedOrders(prev => [...prev, orderToDelete]);
+      setOrders(prev => prev.filter(order => order.id !== orderId));
+    }
+  };
+
+  const permanentlyDeleteOrder = (orderId: string) => {
+    setDeletedOrders(prev => prev.filter(order => order.id !== orderId));
+  };
+
+  const restoreOrder = (orderId: string) => {
+    const orderToRestore = deletedOrders.find(order => order.id === orderId);
+    if (orderToRestore) {
+      setOrders(prev => [...prev, orderToRestore]);
+      setDeletedOrders(prev => prev.filter(order => order.id !== orderId));
+    }
   };
 
   const deleteProduct = (productId: string) => {
@@ -45,6 +70,24 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
   const updateProduct = (productId: string, updatedProduct: Omit<Product, 'id'>) => {
     setProducts(prev => prev.map(product =>
       product.id === productId ? { ...updatedProduct, id: productId } : product
+    ));
+  };
+
+  const deleteCategory = (categoryId: string) => {
+    setCategories(prev => prev.filter(category => category.id !== categoryId));
+  };
+
+  const addCategory = (category: Omit<Category, 'id'>) => {
+    const newCategory: Category = {
+      ...category,
+      id: Date.now().toString()
+    };
+    setCategories(prev => [...prev, newCategory]);
+  };
+
+  const updateCategory = (categoryId: string, updatedCategory: Omit<Category, 'id'>) => {
+    setCategories(prev => prev.map(category =>
+      category.id === categoryId ? { ...updatedCategory, id: categoryId } : category
     ));
   };
 
@@ -117,6 +160,16 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             </button>
 
             <button
+              onClick={() => setActiveTab('deleted')}
+              className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
+                activeTab === 'deleted' ? 'bg-pink-600' : 'hover:bg-gray-700'
+              }`}
+            >
+              <FolderOpen className="h-5 w-5" />
+              <span>Pedidos Excluídos</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('settings')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
                 activeTab === 'settings' ? 'bg-pink-600' : 'hover:bg-gray-700'
@@ -163,6 +216,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       <p><strong>Telefone:</strong> {order.phone}</p>
                       <p><strong>Endereço:</strong> {order.address}</p>
                       <p><strong>Total:</strong> <span className="text-pink-500 font-bold">R$ {order.total.toFixed(2)}</span></p>
+                      <p><strong>Data:</strong> {new Date(order.createdAt).toLocaleDateString('pt-BR')}</p>
                     </div>
 
                     <div className="mb-4">
@@ -170,7 +224,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       <div className="space-y-1">
                         {order.items.map(item => (
                           <div key={item.id} className="text-sm text-gray-600">
-                            {item.quantity}x {item.name}
+                            {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
                           </div>
                         ))}
                       </div>
@@ -209,6 +263,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                           Entregue
                         </button>
                       )}
+                      <button
+                        onClick={() => deleteOrder(order.id)}
+                        className="px-3 py-1 bg-red-500 text-white text-xs rounded-full hover:bg-red-600 transition-colors"
+                      >
+                        Excluir
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -218,6 +278,72 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                 <div className="text-center py-12">
                   <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                   <p className="text-gray-500 text-lg">Nenhum pedido encontrado</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Deleted Orders Tab */}
+          {activeTab === 'deleted' && (
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <h1 className="text-3xl font-bold text-gray-800">Pedidos Excluídos</h1>
+                <span className="bg-red-100 text-red-800 px-4 py-2 rounded-full font-semibold">
+                  {deletedOrders.length} pedidos excluídos
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {deletedOrders.map(order => (
+                  <div key={order.id} className="bg-red-50 border border-red-200 rounded-lg p-6 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="font-semibold text-lg">{order.customerName}</h3>
+                      <span className="px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
+                        Excluído
+                      </span>
+                    </div>
+
+                    <div className="space-y-2 mb-4 text-sm text-gray-600">
+                      <p><strong>Email:</strong> {order.email}</p>
+                      <p><strong>Telefone:</strong> {order.phone}</p>
+                      <p><strong>Endereço:</strong> {order.address}</p>
+                      <p><strong>Total:</strong> <span className="text-pink-500 font-bold">R$ {order.total.toFixed(2)}</span></p>
+                      <p><strong>Data:</strong> {new Date(order.createdAt).toLocaleDateString('pt-BR')}</p>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="font-semibold text-sm mb-2">Itens:</p>
+                      <div className="space-y-1">
+                        {order.items.map(item => (
+                          <div key={item.id} className="text-sm text-gray-600">
+                            {item.quantity}x {item.name} - R$ {(item.price * item.quantity).toFixed(2)}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => restoreOrder(order.id)}
+                        className="px-3 py-1 bg-green-500 text-white text-xs rounded-full hover:bg-green-600 transition-colors"
+                      >
+                        Restaurar
+                      </button>
+                      <button
+                        onClick={() => permanentlyDeleteOrder(order.id)}
+                        className="px-3 py-1 bg-red-600 text-white text-xs rounded-full hover:bg-red-700 transition-colors"
+                      >
+                        Excluir Permanentemente
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {deletedOrders.length === 0 && (
+                <div className="text-center py-12">
+                  <FolderOpen className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-500 text-lg">Nenhum pedido excluído</p>
                 </div>
               )}
             </div>
@@ -244,7 +370,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
                       <p className="text-gray-600 text-sm mb-2">{product.description}</p>
-                      <p className="text-pink-500 font-bold text-xl mb-4">R$ {product.price.toFixed(2)}</p>
+                      <p className="text-pink-500 font-bold text-xl mb-2">R$ {product.price.toFixed(2)}</p>
+                      <p className="text-gray-500 text-sm mb-4">{product.category}</p>
                       <div className="flex space-x-2">
                         <button
                           onClick={() => {
@@ -258,6 +385,52 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                         </button>
                         <button
                           onClick={() => deleteProduct(product.id)}
+                          className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          <span>Excluir</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Categories Tab */}
+          {activeTab === 'categories' && (
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <h1 className="text-3xl font-bold text-gray-800">Gerenciar Categorias</h1>
+                <button
+                  onClick={() => setShowAddCategory(true)}
+                  className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+                >
+                  <Plus className="h-5 w-5" />
+                  <span>Adicionar Categoria</span>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {categories.map(category => (
+                  <div key={category.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <img src={category.image} alt={category.name} className="w-full h-48 object-cover" />
+                    <div className="p-4">
+                      <h3 className="font-semibold text-lg mb-4">{category.name}</h3>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => {
+                            setEditingCategory(category);
+                            setShowAddCategory(true);
+                          }}
+                          className="flex-1 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                          <span>Editar</span>
+                        </button>
+                        <button
+                          onClick={() => deleteCategory(category.id)}
                           className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -293,15 +466,46 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             />
           )}
 
+          {/* Add/Edit Category Modal */}
+          {showAddCategory && (
+            <CategoryModal
+              isOpen={showAddCategory}
+              onClose={() => {
+                setShowAddCategory(false);
+                setEditingCategory(null);
+              }}
+              onSave={(category) => {
+                if (editingCategory) {
+                  updateCategory(editingCategory.id, category);
+                } else {
+                  addCategory(category);
+                }
+                setShowAddCategory(false);
+                setEditingCategory(null);
+              }}
+              category={editingCategory}
+            />
+          )}
+
           {/* Settings Tab */}
           {activeTab === 'settings' && (
             <div>
               <h1 className="text-3xl font-bold text-gray-800 mb-8">Configurações da Loja</h1>
               
               <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Informações de Contato</h2>
+                <h2 className="text-xl font-semibold mb-4">Informações da Loja</h2>
                 
                 <div className="space-y-4">
+                  <div>
+                    <label className="block text-gray-700 mb-2">Nome da Loja</label>
+                    <input
+                      type="text"
+                      value={settings.shopName}
+                      onChange={(e) => setSettings(prev => ({ ...prev, shopName: e.target.value }))}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    />
+                  </div>
+
                   <div>
                     <label className="block text-gray-700 mb-2">Telefone</label>
                     <input
@@ -319,6 +523,17 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       value={settings.instagram}
                       onChange={(e) => setSettings(prev => ({ ...prev, instagram: e.target.value }))}
                       className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 mb-2">URL da Logo</label>
+                    <input
+                      type="url"
+                      value={settings.logoUrl}
+                      onChange={(e) => setSettings(prev => ({ ...prev, logoUrl: e.target.value }))}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      placeholder="URL da imagem da logo"
                     />
                   </div>
                 </div>
@@ -452,6 +667,86 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
             className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors"
           >
             {product ? 'Atualizar' : 'Adicionar'} Produto
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+// Category Modal Component
+interface CategoryModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (category: Omit<Category, 'id'>) => void;
+  category: Category | null;
+}
+
+const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, onSave, category }) => {
+  const [formData, setFormData] = useState({
+    name: category?.name || '',
+    image: category?.image || ''
+  });
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-white p-8 rounded-2xl max-w-md w-full mx-4">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-800">
+            {category ? 'Editar Categoria' : 'Adicionar Categoria'}
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-gray-700 mb-2">Nome da Categoria</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-2">URL da Imagem</label>
+            <input
+              type="url"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors"
+          >
+            {category ? 'Atualizar' : 'Adicionar'} Categoria
           </button>
         </form>
       </div>

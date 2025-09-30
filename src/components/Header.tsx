@@ -15,11 +15,9 @@ const Header: React.FC<HeaderProps> = ({ onCartClick, onAdminClick }) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <img 
-              src="/public/WhatsApp Image 2025-09-23 at 19.50.39 (2).jpeg" 
-              alt="Ge Bolos Gourmet" 
-              className="h-12 w-12 rounded-full object-cover"
-            />
+            <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">G</span>
+            </div>
             <div>
               <h1 className="text-2xl font-bold text-pink-600" style={{ fontFamily: 'cursive' }}>
                 Ge Bolos Gourmet
