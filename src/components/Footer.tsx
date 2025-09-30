@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <h3 className="text-2xl font-bold text-pink-400" style={{ fontFamily: 'cursive' }}>
+                <h3 className="text-2xl font-bold text-amber-400" style={{ fontFamily: 'cursive' }}>
                   Ge Bolos Gourmet
                 </h3>
                 <p className="text-gray-300">Confeitaria Artesanal</p>
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
                 href="https://www.instagram.com/gebolosgoumet?igsh=ejBwNnp4ejhpMnd5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors"
+                className="text-amber-400 hover:text-amber-300 transition-colors"
               >
                 <Instagram className="h-6 w-6" />
               </a>
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                 href="https://wa.me/5585841281952"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 text-gray-300 hover:text-pink-400 transition-colors"
+                className="flex items-center space-x-3 text-gray-300 hover:text-amber-400 transition-colors"
               >
                 <Phone className="h-5 w-5" />
                 <span>+55 85 8412-8195</span>
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
                 href="https://www.instagram.com/gebolosgoumet?igsh=ejBwNnp4ejhpMnd5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 text-gray-300 hover:text-pink-400 transition-colors"
+                className="flex items-center space-x-3 text-gray-300 hover:text-amber-400 transition-colors"
               >
                 <Instagram className="h-5 w-5" />
                 <span>@gebolosgoumet</span>
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
 
           <div>
             <div className="p-4 bg-amber-100/20 rounded-lg border border-amber-200/30">
-              <h5 className="font-semibold text-pink-400 mb-2">Pagamento via PIX</h5>
+              <h5 className="font-semibold text-amber-400 mb-2">Pagamento via PIX</h5>
               <p className="text-sm text-gray-300">
                 Chave PIX: <span className="font-mono">gvrocha1977@gmail.com</span>
               </p>
@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
           </p>
           <p className="flex items-center space-x-2 text-gray-400 mt-4 md:mt-0">
             <span>Feito com</span>
-            <Heart className="h-4 w-4 text-pink-400" />
+            <Heart className="h-4 w-4 text-amber-400" />
             <span>para você</span>
           </p>
         </div>

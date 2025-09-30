@@ -132,7 +132,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             <button
               onClick={() => setActiveTab('orders')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                activeTab === 'orders' ? 'bg-pink-600' : 'hover:bg-gray-700'
+                activeTab === 'orders' ? 'bg-amber-600' : 'hover:bg-gray-700'
               }`}
             >
               <Users className="h-5 w-5" />
@@ -142,7 +142,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             <button
               onClick={() => setActiveTab('products')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                activeTab === 'products' ? 'bg-pink-600' : 'hover:bg-gray-700'
+                activeTab === 'products' ? 'bg-amber-600' : 'hover:bg-gray-700'
               }`}
             >
               <Package className="h-5 w-5" />
@@ -152,7 +152,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             <button
               onClick={() => setActiveTab('categories')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                activeTab === 'categories' ? 'bg-pink-600' : 'hover:bg-gray-700'
+                activeTab === 'categories' ? 'bg-amber-600' : 'hover:bg-gray-700'
               }`}
             >
               <Edit2 className="h-5 w-5" />
@@ -162,7 +162,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             <button
               onClick={() => setActiveTab('deleted')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                activeTab === 'deleted' ? 'bg-pink-600' : 'hover:bg-gray-700'
+                activeTab === 'deleted' ? 'bg-amber-600' : 'hover:bg-gray-700'
               }`}
             >
               <FolderOpen className="h-5 w-5" />
@@ -172,7 +172,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
             <button
               onClick={() => setActiveTab('settings')}
               className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                activeTab === 'settings' ? 'bg-pink-600' : 'hover:bg-gray-700'
+                activeTab === 'settings' ? 'bg-amber-600' : 'hover:bg-gray-700'
               }`}
             >
               <Settings className="h-5 w-5" />
@@ -356,7 +356,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                 <h1 className="text-3xl font-bold text-gray-800">Gerenciar Produtos</h1>
                 <button
                   onClick={() => setShowAddProduct(true)}
-                  className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+                  className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
                 >
                   <Plus className="h-5 w-5" />
                   <span>Adicionar Produto</span>
@@ -370,7 +370,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                     <div className="p-4">
                       <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
                       <p className="text-gray-600 text-sm mb-2">{product.description}</p>
-                      <p className="text-pink-500 font-bold text-xl mb-2">R$ {product.price.toFixed(2)}</p>
+                      <p className="text-amber-600 font-bold text-xl mb-2">R$ {product.price.toFixed(2)}</p>
                       <p className="text-gray-500 text-sm mb-4">{product.category}</p>
                       <div className="flex space-x-2">
                         <button
@@ -405,7 +405,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                 <h1 className="text-3xl font-bold text-gray-800">Gerenciar Categorias</h1>
                 <button
                   onClick={() => setShowAddCategory(true)}
-                  className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+                  className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
                 >
                   <Plus className="h-5 w-5" />
                   <span>Adicionar Categoria</span>
@@ -502,7 +502,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="text"
                       value={settings.shopName}
                       onChange={(e) => setSettings(prev => ({ ...prev, shopName: e.target.value }))}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
 
@@ -512,7 +512,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="tel"
                       value={settings.phone}
                       onChange={(e) => setSettings(prev => ({ ...prev, phone: e.target.value }))}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -522,7 +522,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="url"
                       value={settings.instagram}
                       onChange={(e) => setSettings(prev => ({ ...prev, instagram: e.target.value }))}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     />
                   </div>
 
@@ -532,7 +532,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ isOpen, onClose }) => {
                       type="url"
                       value={settings.logoUrl}
                       onChange={(e) => setSettings(prev => ({ ...prev, logoUrl: e.target.value }))}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="URL da imagem da logo"
                     />
                   </div>
@@ -603,7 +603,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
@@ -615,7 +615,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
               onChange={handleChange}
               required
               rows={3}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
@@ -629,7 +629,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
               min="0"
               step="0.01"
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
@@ -641,7 +641,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
               value={formData.image}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
@@ -652,7 +652,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
               value={formData.category}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             >
               {categories.map(category => (
                 <option key={category.id} value={category.name}>
@@ -664,7 +664,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, onSave, pr
 
           <button
             type="submit"
-            className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors"
+            className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors"
           >
             {product ? 'Atualizar' : 'Adicionar'} Produto
           </button>
@@ -726,7 +726,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, onSave, 
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
@@ -738,13 +738,13 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, onSave, 
               value={formData.image}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors"
+            className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors"
           >
             {category ? 'Atualizar' : 'Adicionar'} Categoria
           </button>
