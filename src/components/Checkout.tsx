@@ -110,7 +110,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                       value={formData.customerName}
                       onChange={handleChange}
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="Seu nome completo"
                     />
                   </div>
@@ -126,7 +126,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="seu@email.com"
                     />
                   </div>
@@ -142,7 +142,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="(85) 99999-9999"
                     />
                   </div>
@@ -158,7 +158,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                       onChange={handleChange}
                       required
                       rows={3}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       placeholder="Rua, número, bairro, cidade, CEP"
                     ></textarea>
                   </div>
@@ -183,7 +183,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
 
                   <button
                     type="submit"
-                    className="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg transition-colors"
+                    className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-lg font-semibold text-lg transition-colors"
                   >
                     Confirmar Pedido
                   </button>
@@ -207,7 +207,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, onOrderComplete })
                   
                   <div className="flex justify-between items-center text-xl font-bold text-pink-500">
                     <span>Total:</span>
-                    <span>R$ {getTotalPrice().toFixed(2)}</span>
+                    <span className="text-amber-600">R$ {getTotalPrice().toFixed(2)}</span>
                   </div>
                 </div>
               </div>

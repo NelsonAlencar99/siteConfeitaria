@@ -67,14 +67,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-xl font-semibold mb-6">Horário de Atendimento</h4>
-            <div className="space-y-2 text-gray-300">
-              <p><span className="font-semibold">Segunda a Sexta:</span> 8h às 18h</p>
-              <p><span className="font-semibold">Sábado:</span> 8h às 16h</p>
-              <p><span className="font-semibold">Domingo:</span> 9h às 14h</p>
-            </div>
-            
-            <div className="mt-8 p-4 bg-pink-500/10 rounded-lg border border-pink-500/20">
+            <div className="p-4 bg-amber-100/20 rounded-lg border border-amber-200/30">
               <h5 className="font-semibold text-pink-400 mb-2">Pagamento via PIX</h5>
               <p className="text-sm text-gray-300">
                 Chave PIX: <span className="font-mono">gvrocha1977@gmail.com</span>

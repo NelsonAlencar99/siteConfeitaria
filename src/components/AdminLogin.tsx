@@ -52,7 +52,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ isOpen, onLogin, onClose }) => 
               value={credentials.email}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               placeholder="admin@exemplo.com"
             />
           </div>
@@ -68,14 +68,14 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ isOpen, onLogin, onClose }) => 
               value={credentials.password}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
               placeholder="Sua senha"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors"
+            className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors"
           >
             Entrar
           </button>

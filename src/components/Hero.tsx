@@ -38,13 +38,13 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="inicio" className="relative bg-gradient-to-br from-pink-50 to-orange-50 py-20 overflow-hidden">
+    <section id="inicio" className="relative bg-gradient-to-br from-amber-50 to-orange-50 py-20 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 mb-10 lg:mb-0 z-10">
             <h2 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-6" style={{ fontFamily: 'cursive' }}>
               {slides[currentSlide].title.split(' ').slice(0, 3).join(' ')}<br />
-              <span className="text-pink-500">{slides[currentSlide].title.split(' ').slice(3).join(' ')}</span>
+              <span className="text-amber-600">{slides[currentSlide].title.split(' ').slice(3).join(' ')}</span>
             </h2>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               {slides[currentSlide].subtitle}
@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <button
                 onClick={() => document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 transition-all hover:scale-105"
+                className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 transition-all hover:scale-105"
               >
                 <span>Ver Produtos</span>
                 <ArrowRight className="h-5 w-5" />
@@ -63,7 +63,7 @@ const Hero: React.FC = () => {
                 href="https://wa.me/5585841281952"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 transition-all"
+                className="border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 transition-all"
               >
                 <Phone className="h-5 w-5" />
                 <span>Fazer Pedido</span>
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
                 href="https://wa.me/5585841281952"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:text-pink-500 transition-colors"
+                className="flex items-center space-x-2 hover:text-amber-600 transition-colors"
               >
                 <Phone className="h-4 w-4" />
                 <span>+55 85 8412-8195</span>
@@ -84,7 +84,7 @@ const Hero: React.FC = () => {
                 href="https://www.instagram.com/gebolosgoumet?igsh=ejBwNnp4ejhpMnd5"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:text-pink-500 transition-colors"
+                className="flex items-center space-x-2 hover:text-amber-600 transition-colors"
               >
                 <Instagram className="h-4 w-4" />
                 <span>@gebolosgoumet</span>
@@ -93,15 +93,15 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-80 h-80">
-              <div className="w-80 h-80 bg-pink-200 rounded-full absolute top-4 left-4 -z-10"></div>
+            <div className="relative w-96 h-64">
+              <div className="w-96 h-64 bg-amber-200 rounded-2xl absolute top-4 left-4 -z-10"></div>
               
               {slides.map((slide, index) => (
                 <img
                   key={index}
                   src={slide.image}
                   alt={`Slide ${index + 1}`}
-                  className={`w-80 h-80 rounded-full object-cover shadow-2xl border-8 border-white absolute top-0 left-0 transition-opacity duration-1000 ${
+                  className={`w-96 h-64 rounded-2xl object-cover shadow-2xl border-8 border-white absolute top-0 left-0 transition-opacity duration-1000 ${
                     index === currentSlide ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
@@ -132,7 +132,7 @@ const Hero: React.FC = () => {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentSlide ? 'bg-pink-500' : 'bg-white/50'
+                    index === currentSlide ? 'bg-amber-600' : 'bg-white/50'
                   }`}
                 />
               ))}

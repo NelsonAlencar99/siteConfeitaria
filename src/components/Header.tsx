@@ -21,10 +21,10 @@ const Header: React.FC<HeaderProps> = ({ onCartClick, onAdminClick }) => {
               className="w-12 h-12 rounded-full object-cover"
             />
             <div>
-              <h1 className="text-2xl font-bold text-pink-600" style={{ fontFamily: 'cursive' }}>
+              <h1 className="text-2xl font-bold text-amber-700" style={{ fontFamily: 'cursive' }}>
                 Ge Bolos Gourmet
               </h1>
-              <p className="text-sm text-gray-600">Confeitaria Artesanal</p>
+              <p className="text-sm text-amber-600">Confeitaria Artesanal</p>
             </div>
           </div>
 
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick, onAdminClick }) => {
             >
               <ShoppingCart className="h-6 w-6" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-pink-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-amber-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                   {getTotalItems()}
                 </span>
               )}
@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick, onAdminClick }) => {
             
             <button
               onClick={onAdminClick}
-              className="w-3 h-3 bg-pink-500 rounded-full hover:bg-pink-600 transition-colors"
+              className="w-3 h-3 bg-amber-600 rounded-full hover:bg-amber-700 transition-colors"
               title="Admin"
             />
           </div>

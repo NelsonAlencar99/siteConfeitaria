@@ -26,8 +26,8 @@ const Products: React.FC = () => {
             onClick={() => setSelectedCategory('all')}
             className={`px-6 py-2 rounded-full font-medium transition-colors ${
               selectedCategory === 'all'
-                ? 'bg-pink-500 text-white'
-                : 'bg-white text-gray-600 hover:bg-pink-100'
+                ? 'bg-amber-600 text-white'
+                : 'bg-white text-gray-600 hover:bg-amber-100'
             }`}
           >
             Todos
@@ -38,8 +38,8 @@ const Products: React.FC = () => {
               onClick={() => setSelectedCategory(category.name)}
               className={`px-6 py-2 rounded-full font-medium transition-colors ${
                 selectedCategory === category.name
-                  ? 'bg-pink-500 text-white'
-                  : 'bg-white text-gray-600 hover:bg-pink-100'
+                  ? 'bg-amber-600 text-white'
+                  : 'bg-white text-gray-600 hover:bg-amber-100'
               }`}
             >
               {category.name}

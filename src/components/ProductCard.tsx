@@ -23,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-48 object-cover"
         />
         <button className="absolute top-4 right-4 p-2 bg-white/90 rounded-full hover:bg-pink-100 transition-colors">
-          <Heart className="h-4 w-4 text-gray-600 hover:text-pink-500" />
+          <Heart className="h-4 w-4 text-gray-600 hover:text-amber-600" />
         </button>
       </div>
       
@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-pink-500">
+            <span className="text-2xl font-bold text-amber-600">
               R$ {product.price.toFixed(2)}
             </span>
             <span className="text-xs text-gray-500">{product.category}</span>
@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           
           <button
             onClick={handleAddToCart}
-            className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full transition-colors hover:scale-110 transform"
+            className="bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full transition-colors hover:scale-110 transform"
           >
             <Plus className="h-5 w-5" />
           </button>

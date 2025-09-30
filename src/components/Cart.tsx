@@ -47,7 +47,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, onCheckout }) => {
                   
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                    <p className="text-pink-500 font-bold">R$ {item.price.toFixed(2)}</p>
+                    <p className="text-amber-600 font-bold">R$ {item.price.toFixed(2)}</p>
                   </div>
 
                   <div className="flex items-center space-x-2">
@@ -84,14 +84,14 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, onCheckout }) => {
           <div className="border-t p-6">
             <div className="flex items-center justify-between mb-6">
               <span className="text-xl font-bold text-gray-800">Total:</span>
-              <span className="text-2xl font-bold text-pink-500">
+              <span className="text-2xl font-bold text-amber-600">
                 R$ {getTotalPrice().toFixed(2)}
               </span>
             </div>
             
             <button
               onClick={onCheckout}
-              className="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-full font-semibold text-lg transition-colors"
+              className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-full font-semibold text-lg transition-colors"
             >
               Finalizar Pedido
             </button>
